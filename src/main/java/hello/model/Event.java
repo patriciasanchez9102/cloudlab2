@@ -1,5 +1,10 @@
 package hello.model;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,12 +16,22 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "events")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Event {
-
+  
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String name;
+    private String venueCode;
+    private LocalDateTime localDateTime;
+    
+    @Column(precision=7, scale=2)
+    private BigDecimal price;
+        
     public Event() {}
 
     public Event(Long id, String name) {
         this.id = id;
-        this.name = name;
+        this.name = name;  
     }
 
     public Long getId() {
@@ -27,9 +42,6 @@ public class Event {
         this.id = id;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
     public String getName() {
         return name;
@@ -39,7 +51,31 @@ public class Event {
         this.name = name;
     }
 
-    private String name;
+	public String getVenueCode() {
+		return venueCode;
+	}
+
+	public void setVenueCode(String venueCode) {
+		this.venueCode = venueCode;
+	}
+
+	public LocalDateTime getLocalDateTime() {
+		return localDateTime;
+	}
+
+	public void setLocalDateTime(LocalDateTime localDateTime) {
+		this.localDateTime = localDateTime;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
+  
 
 
 }
